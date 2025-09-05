@@ -1,12 +1,56 @@
-# React + Vite
+1. React Router 설치
+npm install react-router-dom@6
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Router 컴포넌트 생성
+/src/routes/Router.jsx
+기본 구조 짜기 *외우기보다 복사해서 갖고오는걸 추천
 
-Currently, two official plugins are available:
+3. main.jsx에 App 컴포넌트 대신 Router 컴포넌트로 변경
+기본 형태는 App 컴포넌트를 호출한다. 이걸 Router로 바꿔주자
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+4. 라우터로 관리하고 싶은 컴포넌트를 만든다 *nested route라고도 부름
+- 페이지 간 이동을 가능하게 해주는 라이브러리
+- 라우터에 포함된 자식 컴포넌트를 갈아끼우는 방식으로 페이지 이동을 가능케 함.
+- 배열안의 객체 형식으로 자식 컴포넌트 path 지정.
+- 라우터 자식 컴포넌트를 jsx에 넣고싶을땐 <Outlet> 으로 지정한다. 예: header or main 안에
+- 라우터로 관리되는 자식 component들은 App이 아니고 Router로 관리되어야 한다. *line 9에 App 컴포넌트를 Router로 바꾸는 이유가 이것이다.
 
-## Expanding the ESLint configuration
+5. 라우터와 자식 컴포넌트의 구조 
+- 라우터로 관리하는 자식 컴포넌트는 부모 Router.jsx에서 모두 관리
+- 위의 이유로 Router.jsx에서 자식 컴포넌트를 모두 import 해줘야한다.
+- 자식 컴포넌트는 불려오기 위해 export를 해줘야한다.
+- 최종적으로 Router.jsx에서 자식 컴포넌트들의 path와 element = 보여줄 컴포넌트 지정
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+6. Router 컴포넌트의 Router 객체 정의를 HTML 구조에 맞게 설정
+- 최상위 요소 (url로 접속할 때 처음에 마주할 페이지 설정) : App으로 지정
+- element : 자식 컴포넌트 지정해주기 *path에 따라 보여줄 컴포넌트를 달리함.
+- ** Route로 만들었을 시 지정해주지않은 path로 접근하지 않으면 route가 컴포넌트를 확인하고
+    없을 시 404 error를 띄운다.
+
+--- 페이지 이동 관련
+*App.jsx <header> 부분 참조
+7. Link 컴포넌트
+- 'react-router-dom'의 컴포넌트라 import가 필요
+- 라우터의 자식 컴포넌트들로 이동할때 사용.
+- <a> 태그같이 사용 된다.
+- to={} 속성으로 props를 전달해줘야 한다.
+- props는 라우터에 지정한 path값을 건네주면 된다.
+- 최종적으로 Link로 mark-up된 요소를 클릭 시 자식 컴포넌트로 이동하게 된다.
+- 추가 팁: 홈으로 보내려면 / 하나를 넣어주면 된다.
+- Link는 a태그라 다른 페이지로 갈 때 입력값을 저장하고 가지 않는다
+- 그래서 회원가입등에는 못 씀.
+
+8. NavLink 컴포넌트
+- 7번의 Link 컴포넌트와 기본 작동은 같음
+- 차별점으로 현재 선택된 컴포넌트 (link)에 'active'라는 클래스를 넣어준다.
+- 사용하려면 css등에 .active 효과를 따로 작성해 줘야한다.
+- 활성화된 링크에 스타일 효과등을 추가할때는 NavLink를 활용해보자.
+
+9. useNavigate();
+- 컴포넌트 내부에 정의해서 사용한다.
+- 변수에 받아서 써야한다. 반환값은 함수이다
+- 반환값이 들어간 변수를 이용해 함수를 작성한다.
+- 이후 그 함수를 사용하고 싶은 요소의 onClick={fnName} 속성을 줘서 사용한다
+- 이 때 주의할 점으로 onClick={} 등에 들어가는 함수는 '참조식'으로 사용해야한다. 
+
+10. 

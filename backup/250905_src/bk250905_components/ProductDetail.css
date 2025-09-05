@@ -1,0 +1,36 @@
+.detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: fixed;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-box {
+  padding: 10px;
+  width: 80vw;
+  min-width: 300px;
+  max-width: 600px;
+  display: grid;
+  background-color: #fff;
+  text-align: center;
+}
+
+.detail-img {
+  padding-top: 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.detail-title {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.detail-box :nth-child(n + 2):nth-child(-n + 4){
+  margin-top: 10px;
+}
