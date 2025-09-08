@@ -1,0 +1,56 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const detail = createSlice({
+  name: 'detail', //slice name matching
+  initialState : {
+    cnt: 5
+  },
+  reducers: { // area to edit the state 
+    addCnt(state) { // must receive 'state' param
+      state.cnt += 1;
+    },
+    minusCnt(state) {
+      state.cnt -= 1;
+    },
+    changeCnt(state, action) {
+      state.cnt = action.payload;
+    }
+  }
+}); 
+
+export const {
+  addCnt,
+  changeCnt,
+  minusCnt,
+} = detail.actions;
+
+export default detail.reducer;
+
+
+
+
+
+// 작동되는 코드 backup
+// import { createSlice } from "@reduxjs/toolkit";
+
+// // 'list' 상태관리 slice 생성 및 설정
+// const detail = createSlice({
+//   name: 'list', // slice 명
+//   initialState: { // 상태 관리할 state를 정의하는 영역
+//     inputValue: '',
+//   },
+//   reducers: { // state의 상태를 변화시키는 actions를 정의하는 영역
+//     changeValue(state, action) {
+//       // state param : 'initialState' 의 정보를 담고 있음.
+//       // action param : 외부에서 전달 된 값을 담고 있음.
+//       // action.payload : 전달된 값에 접근할 수 있는 프로퍼티
+//       state.value = action.payload;
+//     },
+//   }
+// });
+
+// // 정의한 Actions 내보내기
+// export const {changeValue} = detail.actions;
+
+// // Reducer 내보내기
+// export default detail.reducer;

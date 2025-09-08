@@ -53,4 +53,42 @@ npm install react-router-dom@6
 - 이후 그 함수를 사용하고 싶은 요소의 onClick={fnName} 속성을 줘서 사용한다
 - 이 때 주의할 점으로 onClick={} 등에 들어가는 함수는 '참조식'으로 사용해야한다. 
 
-10. 
+<!-- Redux -->
+<!-- 상태 관리 라이브러리, 중앙 집중식 상태관리 패턴 구현-->
+1. Redux 설치
+or npm install @reduxjs/toolkit react-redux
+
+2. Redux Store 생성
+경로 예시) src/store/store.js
+
+3. Slices 생성
+경로 예시) src/store/slices/**
+
+4. 생선한 Slices를 Store에 추가
+
+5. main.jsx에 React Reduct <Provider> 추가
+- StrctMode를 제외한 '최상위 컴포넌트' 이어야 한다.
+
+6. 사용
+
+<!-- slices, reducers. why use them? -->
+1. slices consist of a current state and reducers that change the current state.
+2. the current state is read by useSelector
+3. the reducers is read by useDispatch
+ - then the reducer is called such as : dispatch(reducerName());
+
+4. the main idea: why isolate slices under one place 'store'?
+- when it comes to a situation where multiple components need same logic. in that case, the isolated slices being managed by 'store' can be distributed to those multiple components in need rather than writing the over-lapping logics in each component.
+
+5. speaking of number 4, useSelector and useDispatch do not bring the slices to the component in where they are used. they are sort of like a request sender so that the components and slice do not contaminate one another when interacting.
+
+6. explain  
+        changeCnt(state, action) {
+            state.cnt = action.payload;
+    }
+- do not over-think and stick yourself to the conventional definition of 'aciton'. it simply assigns a seat temporarily while setInputNum of local useState() gets the value of input:number. the hollow container of 'action.payload' is waiting the local useState() to get you the value of input to replace current state of its slice.
+
+- why do I need both slice and local useState()?
+- : the input:number 'only' exists in the component, which means the slice does not have a way to get the user-input (but you need the input value to replace current state of slice.). therefore, use both local useState() and slice. setInputNum in local gets the value of input for slice, then changeCnt (the current state changer) thankfully gets the input value from setInputNum, finally changes 'cnt' in p tag ('cnt' here is the state from slice.)
+
+My Redux notes are here.
