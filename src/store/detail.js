@@ -30,3 +30,5 @@ export const { setInputValue } = detailSlice.actions;
 
 // 9. 스토어(중앙 통제실)가 이 슬라이스의 리듀서를 알 수 있도록 기본적으로 내보냅니다.
 export default detailSlice.reducer;
+
+

@@ -92,3 +92,17 @@ or npm install @reduxjs/toolkit react-redux
 - : the input:number 'only' exists in the component, which means the slice does not have a way to get the user-input (but you need the input value to replace current state of slice.). therefore, use both local useState() and slice. setInputNum in local gets the value of input for slice, then changeCnt (the current state changer) thankfully gets the input value from setInputNum, finally changes 'cnt' in p tag ('cnt' here is the state from slice.)
 
 My Redux notes are here.
+
+<!-- Redux Thunk -->
+1. Redux Thunk 설치 2가지
+npm install redux-thunk
+npm install redux-thunk @version
+
+2. axios 설치하기
+npm i axios
+
+
+2. Redux Thunk 폴더 생성 (store 안에)
+- slice 단위로 같이 묶어서 파일을 생성한다.
+
+3. 해당 slice에 `extraReducers` 추가

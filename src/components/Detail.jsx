@@ -4,18 +4,18 @@ import { addCnt, changeCnt, minusCnt } from '../store/slices/detail';
 import { useState } from 'react';
 
 function Detail() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const cnt = useSelector(state => state.detail.cnt);
 
   const [inputNum, setInputNum] = useState(0);
 
-  const convertAndSetNumber = (e) => {
-    if(!isNaN(e.target.val)) {
-      setInputNum(parseInt(e.target.val));
-    } else {
-      console.error('숫자 아니다.');
-    }
-  }
+  // // const convertAndSetNumber = (e) => {
+  // //   if(!isNaN(e.target.val)) {
+  // //     setInputNum(parseInt(e.target.val));
+  // //   } else {
+  // //     console.error('숫자 아니다.');
+  // //   }
+  // }
   return (
     <>
       <h1>상세 페에지</h1>
